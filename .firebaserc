@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "todo-fir": {
+      "hosting": {
+        "app": [
+          "todo-fir"
+        ]
+      }
+    }
+  }
+}
