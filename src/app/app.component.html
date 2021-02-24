@@ -17,11 +17,11 @@
     <input id="toggle-all" class="toggle-all" type="checkbox">
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
-      <li [ngClass]="{'completed': todo.selected}" *ngFor="let todo of todos">
+      <li [ngClass]="{'completed': todo.selected}" *ngFor="let todo of todos$ | async">
         <div class="view">
-          <input class="toggle" type="checkbox" [checked]="todo.selected"  (change)="todo.selected = !todo.selected">
+          <input class="toggle" type="checkbox" [checked]="todo.selected"  (change)="toggleTodo(todo.id, todo.selected)">
           <label>{{ todo.text }}</label>
-          <button class="destroy" (click)="deleteTodo(todo)"></button>
+          <button class="destroy" (click)="deleteTodo(todo.id)"></button>
         </div>
       </li>
     </ul>

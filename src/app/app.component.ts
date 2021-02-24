@@ -8,25 +8,24 @@ import {Todo} from './models/todo.model';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit{
-  todos: Todo[];
+export class AppComponent implements OnInit {
   currentTodo: string;
-
-  constructor(private service: TodoService) { }
-
-
-  ngOnInit(): void {
-    this.todos = this.service.getTodos();
+  todos$ = this.todoService.todos$;
+  constructor(private todoService: TodoService) {
   }
-
-  deleteTodo(todo: Todo): void {
-    const index = this.todos.indexOf(todo);
-    this.todos.splice(index, 1);
-  }
+  ngOnInit(): void {}
 
   addTodo(): void {
     const todo = new Todo();
     todo.text = this.currentTodo;
-    this.todos.push(todo);
+    this.todoService.createTodo(todo);
+  }
+
+  toggleTodo(id: string, selected: boolean): void {
+    this.todoService.toggleTodo(id, selected);
+  }
+
+  deleteTodo(id: string): void {
+    this.todoService.deleteTodo(id);
   }
 }
